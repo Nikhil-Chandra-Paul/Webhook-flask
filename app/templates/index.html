@@ -28,7 +28,7 @@
        var nodelist = document.getElementsByTagName("li").length-1
        path="/data/"+nodelist
        
-       //Polling for every 15 seconds interval
+       //Polling for every 15 seconds
        setInterval(() => fetch(path)
                 .then(res => res.json())
                 .then(res => {

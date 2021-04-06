@@ -6,7 +6,7 @@ import datetime as dt
 @app.route('/index', methods=["GET"])
 def index(): # Returns UI for Actions on Repository
     l=[]
-    my_col=mydb['items'].find()
+    my_col=mydb['items'].find() # Replace  items with your Collections name
     for i in my_col:
         if i['action']=='PR':
             l.append('"{}" submitted a Pull Request from "{}" to "{}"  on {}'.format(i["author"],i["from_branch"].split(':')[-1],i["to_branch"].split(":")[-1],convert(i["timestamp"])))
@@ -19,8 +19,8 @@ def index(): # Returns UI for Actions on Repository
 @app.route('/data/<counts>', methods=["GET"])
 def data(counts): #Returns the updates to UI
     data={}
-    if int(counts)<mydb['items'].find().count():
-        my_col=mydb['items'].find()
+    if int(counts)<mydb['items'].find().count(): # Replace  items with your Collections name
+        my_col=mydb['items'].find() # Replace  items with your Collections name
         for j,i in enumerate(my_col[int(counts):]):
             if i['action']=='PR':
                 data[j]='"{}" submitted a Pull Request from "{}" to "{}"  on {}'.format(i["author"],i["from_branch"].split(':')[-1],i["to_branch"].split(":")[-1],convert(i["timestamp"]))
@@ -38,7 +38,7 @@ def convert(timestamp): #Conversion of timestamp to required format
     time=time.split(':')[0]+" "+time.split(":")[1]
     d_t=dt.datetime.strptime(date+" "+time,"%Y-%m-%d %H %M")
     day=d_t.strftime("%d")
-    
+
     if day[0]!='1' and (day[1] in ['1','2','3']):
         if day[1]=="1":
             suffix="st"
