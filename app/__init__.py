@@ -7,6 +7,10 @@ from app.webhook.routes import webhook
 def create_app():
 
     app = Flask(__name__)
+
+    #registering app.routes
+    with app.app_context():
+        from . import routes
     
     # registering all the blueprints
     app.register_blueprint(webhook)
